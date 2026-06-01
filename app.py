@@ -1,15 +1,19 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import pymysql
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 app.secret_key = "senha"
 
 conexao = pymysql.connect(
-    host="localhost",
-    user="local",
-    password="mogadorburguer",
-    database="hamburgueria"
+    host=os.getenv('MYSQL_HOST', 'localhost'),
+    user=os.getenv('MYSQL_USER', 'root'),
+    password=os.getenv('MYSQL_PASSWORD', ''),
+    database=os.getenv('MYSQL_DATABASE', 'hamburgueria')
 )
 
 @app.route("/")
@@ -191,4 +195,7 @@ def finalizar():
     return redirect("/")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(
+    host="0.0.0.0",
+    port=5000,
+    debug=True)
