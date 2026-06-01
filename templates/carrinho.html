@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburgueria</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrinho.css') }}">
+</head>
+
+<body>
+    <div id="carrinho">
+        <a href="/"><img src="{{ url_for('static', filename='imagens/home.png')}}"></a>
+    </div>
+    <header>
+        <img src="{{ url_for('static', filename='imagens/PRA QUEM TEM.png') }}"
+            style="width: 60%; margin: 0 auto 0 auto;">
+    </header>
+
+    <main>
+        <section>
+            <form action="/finalizar" method="POST">
+                <h1>Confirmar Compra</h1>
+                <div class="pedido">
+                    <h3>Seu Pedido</h3>
+                    {% for item in carrinho %}
+
+                    <p>
+                        {{ item.produto }}
+                        <strong>x{{ item.quantidade }}</strong>
+
+                        — R$ {{ "%.2f"|format(item.preco * item.quantidade) }}
+                    </p>
+
+                    {% endfor %}
+                    <p>
+                        <strong>
+                            Total: R$ {{ "%.2f"|format(total)|replace(".", ",") }}
+                        </strong>
+                    </p>
+                    <h4>Forma de Pagamento</h4>
+                    <div id="pagamento">
+                        <label>
+                            <input type="radio" name="pagamento" value="Crédito">Crédito
+                        </label>
+                        <label>
+                            <input type="radio" name="pagamento" value="Débito">Débito
+                        </label>
+                        <label>
+                            <input type="radio" name="pagamento" value="Pix">Pix
+                        </label>
+                    </div>
+                </div>
+                <div class="endereco">
+                    <h3>Nome</h3>
+                    <input type="text" name="nome" placeholder="Digite Aqui" required>
+                    <h3>Endereço</h3>
+                    <input type="text" name="cep" placeholder="Bairro/Rua/Número" required>
+                </div>
+                <button type="submit" style="
+    background-color: rgb(255, 172, 77);
+    padding: 1%;
+    margin: 0 1% 1% auto;
+    width: 40%;
+    border-top: 4px solid rgb(233, 113, 14);
+    border-bottom: 4px solid rgb(182, 77, 8);
+    border-left: 4px solid rgb(233, 113, 14);
+    border-right: 4px solid rgb(182, 77, 8);
+    border-radius: 10px;
+">
+                    Finalizar Compra
+                </button>
+                <a href="/limpar_carrinho" style="
+    background-color: rgb(255, 172, 77);
+    padding: 1%;
+    margin: 0 1% 1% auto;
+    width: 40%;
+    border-top: 4px solid rgb(233, 113, 14);
+    border-bottom: 4px solid rgb(182, 77, 8);
+    border-left: 4px solid rgb(233, 113, 14);
+    border-right: 4px solid rgb(182, 77, 8);
+    border-radius: 10px;
+">Cancelar Compra</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>Todos os Direitos Reservados 2026</p>
+    </footer>
+
+</body>
+
+</html>

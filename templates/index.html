@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburgueria</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='imagens/PRA QUEM TEM.png') }}"
+            style="width: 60%; margin: 0 auto 0 auto;">
+    </header>
+
+    <main>
+        <div id="carrinho">
+            <a href="/carrinho"><img src="{{ url_for('static', filename='imagens/cart (1).png')}}"></a>
+            <span class="badge" id="badge">
+                {{ total_itens }}
+            </span>
+        </div>
+        <aside>
+            <nav>
+                <a href="#lanches">Lanches</a>
+                <a href="#porcoes">Porções</a>
+                <a href="#doces">Doces</a>
+            </nav>
+        </aside>
+
+        <section>
+
+            <div id="lanches">
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/X.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Cheeseburguer - R$ 30,00</h5>
+                        <p class="card-text">
+                            Pão Gergelim, Pat 180g, Queijo Prato, Tomate, Alface, Molho da Cada
+                        </p>
+                    </div>
+                    <button onclick="adicionarCarrinho(1,'Cheeseburguer', 30)">
+                        Comprar
+                    </button>
+                </div>
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/Smash.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Smash Burguer - R$ 30,00</h5>
+                        <p class="card-text">
+                            Pão Gergelim, 2 Smash Pat 90g, Queijo Cheddar, Molho da Casa, Picles
+                        </p>
+                    </div>
+                    <button onclick="adicionarCarrinho(2,'Smash burguer', 30)">
+                        Comprar
+                    </button>
+                </div>
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/Cheddar.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Duplo Cheddar Bacon - R$ 40,00</h5>
+                        <p class="card-text">
+                            Pão Gergelim, 2 Pat 180g, Queijo Cheddar, Molho da Casa, Picles
+                        </p>
+                    </div>
+                    <button onclick="adicionarCarrinho(3,'Duplo Cheddar', 40)">
+                        Comprar
+                    </button>
+                </div>
+
+            </div>
+
+            <div id="porcoes">
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/Batata.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Batatas Fritas - R$ 14,00</h5>
+                        <p class="card-text">Acompanha Molhos; 500g</p>
+                    </div>
+                    <button onclick="adicionarCarrinho(4,'Batata Frita', 14)">
+                        Comprar
+                    </button>
+                </div>
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/Onion.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Onion Rings - R$ 16,00</h5>
+                        <p class="card-text">Acompanha Molhos; 500g</p>
+                    </div>
+                    <button onclick="adicionarCarrinho(5,'Onion Ring', 16)">
+                        Comprar
+                    </button>
+                </div>
+
+            </div>
+
+            <div id="doces">
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/churros.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Mini Churros - R$ 11,00</h5>
+                        <p class="card-text">Acompanha Doce de Leite; 250g</p>
+                    </div>
+                    <button onclick="adicionarCarrinho(6,'Mini Churros', 11)">
+                        Comprar
+                    </button>
+                </div>
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/macarron.png') }}" class="card-img-top" alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Macarons - R$ 14,00</h5>
+                        <p class="card-text">Porção de Macarons, 200g</p>
+                    </div>
+                    <button onclick="adicionarCarrinho(7,'macarons', 14)">
+                        Comprar
+                    </button>
+                </div>
+
+                <div class="card" style="width: 15rem;">
+                    <img src="{{ url_for('static', filename='imagens/petit gateu.png') }}" class="card-img-top"
+                        alt="...">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Petit Gateu - R$ 18,00</h5>
+                        <p class="card-text">Acompanha Calda de Chocolate; 300g</p>
+                    </div>
+                    <button onclick="adicionarCarrinho(8,'Petit Gateu', 18)">
+                        Comprar
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>Todos os Direitos Reservados 2026</p>
+    </footer>
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
+</body>
+
+</html>
